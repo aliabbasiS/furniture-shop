@@ -1,11 +1,44 @@
 import { Button } from "@mui/material";
 import Rating from "@mui/material/Rating/Rating";
 import { useState } from "react";
+import 'swiper/css';
+import { Keyboard, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { swipernav } from "./swiperchange";
+
+
+
+
+
+// const changecolor=()=>{
+//     document.getElementById('cir1')?.classList.add('bg-white')
+//     document.getElementById('cir1')?.classList.remove('bg-gray-300 ')
+//     console.log('f')
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const furnitureshop=()=>{
    const [num,setnum]=useState(1)
+   const [change,setchange]=useState(1)
+   const [isClicked, setIsClicked] = useState(false)
     return(
-    <>
+        <>
+        
     <div className="h-screen flex flex-col w-screen bg-white">
      
         <header className="w-full pl-10 border flex  md:h-24 justify-between  text-center h-1/6">
@@ -31,23 +64,29 @@ const furnitureshop=()=>{
             <div className="flex justify-between">
 
                 <button><img src="back.svg" className="w-7 mb-4" alt="" /></button>
-                <span className="font-semibold text-3xl ">01 <span className="text-gray-500 text-2xl ">/ 05</span> </span>
+                <span className="font-semibold text-3xl ">{`0${change}`} <span className="text-gray-500 text-2xl ">/ 05</span> </span>
             </div>
             <div className="flex justify-between">
                 <span className="font-semibold text-gray-400">Chair / <span className="text-black">Meyl Lounge Chair</span></span>
                 <div className="gap-10 flex justify-between">
-                    <img src="/public/backward.svg" alt="" />
-                    <img src="/public/forward.svg" alt="" />
+                    <button onClick={()=>{
+                        if(1<change)
+                        setchange(change-1)}}><img src="/public/backward.svg" alt="" /></button>
+                    <button onClick={()=>{
+                        if(change<5)
+                        setchange(change+1)}}> <img src="/public/forward.svg" alt="" /></button>
                 </div>
             </div>
 
         </main>
+        <div className="flex">
 
-        <section className="w-1/2 h-4/5 flex flex-col px-10  ">
+
+        <section className="w-1/2 h-screen px-10">
         {/* Merl Lounge Chair */}
-            <div className=" h-5/6  ">
+            <div>
 
-                <h1 className="text-8xl font-bold ">Merl Lounge Chair</h1>
+                <h1 className="text-6xl font-bold ">Merl Lounge Chair</h1>
                 <div className="flex my-6 justify-between">
                     <span className="text-3xl font-bold">$149.99</span>
                     <div className="flex items-center gap-4">
@@ -56,10 +95,14 @@ const furnitureshop=()=>{
                     <span className="text-xl font-medium"> 4.6 / 5.0 (556)</span>
                     </div>
                 </div>
-                <span className="text-2xl font-semibold leading-8 ">Lsorem ipsum dolor sit amet, consectetur adipisicing elit. Harum voluptatum ducimus hic alias error unde aliquam, fugiat architecto obcaecati. Harum suscipit aspernatur perferendis eius sint dolores dolore magni eaque consequatur.
+                <span className="text-xl font-semibold ">Lsorem ipsum dolor sit amet, consectetur adipisicing elit. Harum voluptatum ducimus hic alias error unde aliquam, fugiat architecto obcaecati. Harum suscipit aspernatur perferendis eius sint dolores dolore magni eaque consequatur.
                 Voluptatibus repellendus quas dolorem explicabo architecto tenetur, molestiae soluta est amet odio obcaecati. Quo corporis non impedit, accusamus libero soluta provident nemo qui repellat numquam optio placeat, beatae, quod fugit?</span>
                 {/* color pallate */}
-                <img className=" my-9 w-1/3 " src="/public/colorpalet.svg" alt="" />
+                <div>
+                    <button  id="cir1" className={isClicked ? 'bg-gray-300' : 'bg-white'}>
+                        <img className="mix-blend-multiply" src="/public/cer1.jpg" alt="" />
+                    </button>
+                </div>
                 <div className="flex gap-6">
 
                 <div   className="w-1/3 border  flex justify-between items-center border-gray-400 p-4 ">
@@ -70,11 +113,44 @@ const furnitureshop=()=>{
                 </div>
                 <Button onClick={()=>{console.log(num)}} className="w-1/3" variant="contained" color="success">Add to cart</Button>
                 </div>
-                <span className="mt-6"> Free 3-5 day shipping  •  Tool-free assembly  •  30-day trial</span>
+                <div className="mt-5 font-serif">
+
+                    <span> Free 3-5 day shipping  •  Tool-free assembly  •  30-day trial</span>
+                </div>
 
             </div>
-
+            <div className="order-1 my-5 flex items-center justify-between" >
+                <span style={{color:'#3AA39F'}} className="flex gap-3 font-semibold "><img src="/public/Vector.svg" alt="" />Add to Wishlist </span>
+                <img className="p-4" src="/public/social.jpg" alt="" />
+            </div>
+           
         </section>
+        
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={30}
+        keyboard={{
+          enabled: true,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Keyboard, Pagination, Navigation]}
+        className="mySwiper"
+      >
+        <SwiperSlide>Slide 1</SwiperSlide>
+        <SwiperSlide>Slide 2</SwiperSlide>
+        <SwiperSlide>Slide 3</SwiperSlide>
+        <SwiperSlide>Slide 4</SwiperSlide>
+        <SwiperSlide>Slide 5</SwiperSlide>
+        <SwiperSlide>Slide 6</SwiperSlide>
+        <SwiperSlide>Slide 7</SwiperSlide>
+        <SwiperSlide>Slide 8</SwiperSlide>
+        <SwiperSlide>Slide 9</SwiperSlide>
+        {swipernav}
+      </Swiper>
+          </div>
         
         
     </div>
